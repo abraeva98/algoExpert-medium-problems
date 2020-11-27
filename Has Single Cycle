@@ -1,0 +1,25 @@
+
+  You're given an array of integers where each integer represents a jump of its
+  value in the array. For instance, the integer 2 represents a jump
+  of two indices forward in the array; the integer -3 represents a
+  jump of three indices backward in the array.
+  
+  If a jump spills past the array's bounds, it wraps over to the other side. For
+  instance, a jump of -1  at index  0  brings us to the last index in
+  the array. 
+
+function hasSingleCycle(array) {
+	let count = 0;
+	let currentIdx = 0;
+	while (count < array.length) {
+		if (count > 0 && currentIdx === 0) return false
+		count ++;
+		let nextIndex = (currentIdx + array[currentIdx]) % array.length;
+		if (nextIndex < 0) {
+			currentIdx = array.length + nextIndex
+		} else {
+      currentIdx = nextIndex
+    }
+  }
+	return currentIdx === 0
+}
