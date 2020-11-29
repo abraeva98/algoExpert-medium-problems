@@ -1,0 +1,25 @@
+
+  You're given an array of integers and an integer. Write a function that moves
+  all instances of that integer in the array to the end of the array and returns
+  the array.
+  
+  The function should perform this in place (i.e., it should mutate the input
+  array) and doesn't need to maintain the order of the other integers.
+
+function moveElementToEnd(array, toMove) {
+	let right = 0;
+	let left = array.length - 1;
+	while (right < left) {
+		if (array[right] === toMove && array[left] !== toMove) {
+			array[right] = array[left];
+			array[left] = toMove;
+			left --;
+			right ++;
+		} else if (array[right] === toMove && array[left] === toMove) {
+			left --
+		} else { 
+			right ++;
+		}
+	}
+	return array
+}
