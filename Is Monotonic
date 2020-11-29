@@ -12,6 +12,18 @@
   Note that empty arrays and arrays of one element are monotonic.
   
 function isMonotonic(array) {
+	let isNonDecreasing = true;
+	let isNonIncreasing = true;
+	for (let i = 0; i < array.length; i ++) {
+		if (array[i] < array[i + 1]) isNonIncreasing = false;
+		if (array[i] > array[i + 1]) isNonDecreasing = false;
+	}
+	return isNonDecreasing || isNonIncreasing
+}
+
+______________________________________________________________________________
+
+function isMonotonic(array) {
 	let increment = true;
 	let p1 = 1;
 	if (array.length <= 2) return true;
