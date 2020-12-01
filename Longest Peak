@@ -1,0 +1,35 @@
+
+  Write a function that takes in an array of integers and returns the length of
+  the longest peak in the array.
+  
+  A peak is defined as adjacent integers in the array that are 
+  strictly increasing until they reach a tip (the highest value in the peak), at which
+  point they become  decreasing. At least three integers are required to
+  form a peak.
+  
+
+function longestPeak(array) {
+	let length = 0;
+  let longest;
+  let i = 1;
+  while (i < array.length - 1) {
+		if (!(array[i - 1] < array[i] && array[i] > array[i + 1])) {
+			i ++;
+			continue;
+		}
+		
+    let l = i - 1;
+    let r = i + 1;
+    while (l >= 0 && array[l] > array[l - 1]) {
+        l --;
+    }
+    while (r < array.length && array[r] > array[r + 1]) {
+        r ++;
+    }
+    longest = r - l + 1;
+		
+		length = Math.max(longest, length)
+    i = r;
+    } 
+  return length;
+}
