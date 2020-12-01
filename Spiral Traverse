@@ -1,0 +1,37 @@
+  Write a function that takes in an n x m two-dimensional array (that can be
+  square-shaped when n == m) and returns a one-dimensional array of all the
+  array's elements in spiral order.
+  
+  Spiral order starts at the top left corner of the two-dimensional array, goes
+  to the right, and proceeds in a spiral pattern all the way until every element
+  has been visited.
+
+
+function spiralTraverse(array) {
+	let row = 0;
+	let rowEnd = array.length - 1;
+	let column = 0;
+	let columnEnd = array[0].length - 1;
+	let newArray = [];
+	while (row <= rowEnd && column <= columnEnd) {
+		for (let i = column; i <= columnEnd; i ++) {
+			newArray.push(array[row][i])
+		}
+		for (let i = row + 1; i <= rowEnd; i ++) {
+			newArray.push(array[i][columnEnd])
+		}
+		for (let i = columnEnd - 1; i >= column; i --) {
+			if (row === rowEnd) break;
+			newArray.push(array[rowEnd][i])
+		}
+		for (let i = rowEnd - 1; i > row; i --) {
+			if (column === columnEnd) break;
+			newArray.push(array[i][column])
+		}
+		row ++;
+		rowEnd --;
+		column ++;
+		columnEnd --;
+	}
+	return newArray; 
+}
