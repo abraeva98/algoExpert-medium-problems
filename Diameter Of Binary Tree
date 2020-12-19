@@ -1,0 +1,16 @@
+Given a binary tree, you need to compute the length of the diameter of the tree. 
+The diameter of a binary tree is the length of the longest path between any two nodes in a tree. 
+This path may or may not pass through the root.
+
+const diameterOfBinaryTree = function(root) {
+    if (root === null) return 0;
+    const center = helper(root.left) + helper(root.right);
+    const left = diameterOfBinaryTree(root.left);
+    const right = diameterOfBinaryTree(root.right);
+    return Math.max(center, left, right);
+}
+
+const helper = (tree) => {
+    if (tree === null) return 0;
+    return 1 + Math.max(helper(tree.left), helper(tree.right));
+}
