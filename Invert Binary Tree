@@ -1,0 +1,24 @@
+  Write a function that takes in a Binary Tree and inverts it. In other words,
+  the function should swap every left node in the tree for its corresponding
+  right node.
+
+function invertBinaryTree(tree) {
+	const queue = [tree];
+	while (queue.length) {
+		let currentNode = queue.shift();
+    if (currentNode === null) continue;
+		let temp = currentNode.right;
+	  currentNode.right = currentNode.left;
+	  currentNode.left = temp;
+		queue.push(currentNode.left);
+		queue.push(currentNode.right)
+	}
+}
+
+class BinaryTree {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
