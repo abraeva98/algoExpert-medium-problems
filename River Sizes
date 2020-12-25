@@ -14,43 +14,43 @@
   in the input matrix. The sizes don't need to be in any particular order.
 
 function riverSizes(matrix) {
-	let sizes = [];
-	let visited = matrix.map(row => row.map(value => false))
+	let isVisited = matrix.map(row => row.map(value => false));
+	let riverSizes =[];
 	for (let i = 0; i < matrix.length; i ++) {
 		for (let j = 0; j < matrix[i].length; j ++) {
-			if (visited[i][j]) continue;
-			checkNeighbors(i, j, matrix, visited, sizes)
+			  if (matrix[i][j] === 1 && isVisited[i][j] === false) {
+					let river = findRiver(isVisited, matrix, i, j)
+				  riverSizes.push(river)
+				}
 		}
 	}
-	return sizes
+	return riverSizes;
 }
 
-function checkNeighbors(i, j, matrix, visited, size) {
-	let currentRiverSize = 0;
-		let stack = [[i, j]];
-		while (stack.length) {
-			let currentNode = stack.pop()
-			i = currentNode[0]
-			j = currentNode[1]
-			if (visited[i][j]) continue;
-			visited[i][j] = true;
-			if (matrix[i][j] === 0) continue;
-			currentRiverSize ++
-			let unvisited = findAll(i, j, matrix, visited)
-			for (let neighbor of unvisited) {
-				stack.push(neighbor)
-			}
+function findRiver(isVisited, matrix, i, j) {
+	let size = 0;
+	let array = [[i, j]];
+	while (array.length) {
+		let currIdx = array.pop();
+		let i = currIdx[0];
+		let j = currIdx[1];
+		if (isVisited[i][j]) continue;
+		isVisited[i][j] = true;
+		if (matrix[i][j] === 0) continue;
+		size ++;
+		let neighbors = findNeighbors(isVisited, matrix, i, j);
+		for (let neighbor of neighbors) {
+			array.push(neighbor)
 		}
-	if (currentRiverSize > 0) {
-		size.push(currentRiverSize)
 	}
+	return size;
 }
 
-function findAll(i, j, matrix, visited) {
-	let unvisitedNeighbors = [];
-	if (i > 0 && !visited[i - 1][j]) unvisitedNeighbors.push([i - 1, j]);
-	if (i < matrix.length - 1 && !visited[i + 1][j]) unvisitedNeighbors.push([i + 1, j]);
-	if (j > 0 && !visited[i][j - 1]) unvisitedNeighbors.push([i, j - 1]);
-	if (j < matrix[0].length - 1 && !visited[i][j+1]) unvisitedNeighbors.push([i, j + 1]);
-	return unvisitedNeighbors;
+function findNeighbors(isVisited, matrix, i, j) {
+	let array = [];
+	if (i < matrix.length - 1 && !isVisited[i + 1][j]) array.push([i + 1, j])
+	if (i > 0 && !isVisited[i - 1][j]) array.push([i - 1, j])
+	if (j < matrix[0].length - 1 && !isVisited[i][j + 1]) array.push([i, j + 1])
+	if (j > 0 && !isVisited[i][j - 1]) array.push([i, j - 1])
+	return array;
 }
