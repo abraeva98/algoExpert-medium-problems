@@ -1,0 +1,71 @@
+function removeIslands(matrix) {
+	let rowStart = 0;
+	let rowEnd = matrix.length - 1;
+	let columnStart = 0;
+	let columnEnd = matrix[0].length - 1;
+	let count = 0;
+	let copyOfMatrix = []
+	for (let i = 0; i < matrix.length; i ++) {
+		let array = [];
+		for (let j = 0; j < matrix[i].length; j ++) {
+			array.push(matrix[i][j])
+		}
+		copyOfMatrix.push(array)
+	}
+		while (columnStart < columnEnd) {
+			if (matrix[rowStart][columnStart] === 1) {
+				checkElement(copyOfMatrix, rowStart, columnStart)
+			}
+			columnStart ++;
+		}
+	  columnStart = 0;
+    while (rowStart < rowEnd) {
+			if (matrix[rowStart][columnEnd] === 1) {
+				checkElement(copyOfMatrix, rowStart, columnEnd)
+			}
+			rowStart ++;
+		}
+	 rowStart = 0;
+	 while (columnEnd > columnStart) {
+		 if (matrix[rowEnd][columnEnd] === 1) {
+			 checkElement(copyOfMatrix, rowEnd, columnEnd)
+		 }
+		 columnEnd --;
+	 }
+	columnEnd = matrix[0].length - 1;
+	while (rowEnd > rowStart) {
+		if (matrix[rowEnd][columnStart] === 1) {
+			checkElement(copyOfMatrix, rowEnd, columnStart)
+		}
+		rowEnd --;
+	}
+	rowEnd = matrix.length - 1;
+	for (let i = 1; i < matrix.length - 1; i ++) {
+		for (let j = 1; j < matrix[i].length - 1; j ++) {
+			if (copyOfMatrix[i][j] === 1) matrix[i][j] = 0;
+		}
+	}
+  return matrix;
+}
+
+function checkElement(matrix, i, j) {
+	let check = [[i, j]];
+	while (check.length) {
+	 let current = check.pop();
+	 i = current[0];
+	 j = current[1];
+	 if (matrix[i][j] === 0 || matrix[i][j] === 2) continue;
+	 if (matrix[i][j] === 1) matrix[i][j] = 2;
+	 let neighbors = findNeighbors(matrix, i, j)
+	 for (let neighbor of neighbors) check.push(neighbor)
+	}
+}
+
+function findNeighbors(matrix, i, j) {
+	let neighbors = [];
+	if (i < matrix.length - 1) neighbors.push([i + 1, j])
+	if (i > 0) neighbors.push([i - 1, j])
+	if (j < matrix[0].length - 1) neighbors.push([i, j + 1])
+	if (j > 0) neighbors.push([i, j - 1])
+	return neighbors;
+}
