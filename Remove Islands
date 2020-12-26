@@ -13,6 +13,7 @@ You can think of islands as patches of black that don't touch the border of the 
 Write a function that returns a modified version of the input matrix, where all of the islands are removed. You remove an island 
 by replacing it with 0s. Naturally, you're allowed to mutate the input matrix.
 
+Solution 1 O(mn) where m is the number of the rows and n is the number of the columns.
 
 */
 
