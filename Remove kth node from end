@@ -6,7 +6,36 @@ class LinkedList {
 }
 
 function removeKthNodeFromEnd(head, k) {
-  // Write your code here.
+	let counter = 1;
+	let first = head;
+	let second = head;
+	while (counter <= k) {
+		counter ++;
+		first = first.next;
+	}
+	if (first === null) {
+		head.value = head.next.value;
+		head.next = head.next.next;
+		return;
+	}
+	while (first.next !== null) {
+		first = first.next;
+		second = second.next;
+	}
+	second.next = second.next.next;
+}
+
+
+// 2nd solution
+
+class LinkedList {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+function removeKthNodeFromEnd(head, k) {
 	let node = head;
 	let length = 1;
 	while (node !== null && node.next !== null) {
