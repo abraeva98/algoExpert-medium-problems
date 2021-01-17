@@ -1,0 +1,10 @@
+function powerset(array) {
+	let powerset = [[]];
+	for (let i = 0; i < array.length; i ++) {
+		let length = powerset.length
+		for (let j = 0; j < length; j ++) {
+			powerset.push(powerset[j].concat(array[i]))
+		}
+	}
+	return powerset;
+}
