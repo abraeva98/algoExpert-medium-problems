@@ -1,0 +1,29 @@
+function cycleInGraph(edges) {
+	let visited = edges.map(el => el = false);
+	let stack = edges.map(el => el = false);
+	
+	for (let i = 0; i < edges.length; i ++) {
+		if (visited[i]) continue;
+		const hasCycle = searchAllEdges(i, edges, visited, stack);
+		if (hasCycle) return true;
+	}
+	return false;
+}
+
+function searchAllEdges(index, edges, visited, stack) {
+		visited[index] = true;
+		stack[index] = true;
+	
+		let neighbors = edges[index];
+		for (const neighbor of neighbors) {
+				if (!visited[neighbor]) {
+						let cycle = searchAllEdges(neighbor, edges, visited, stack);
+						if (cycle) return true;
+				} else if (stack[neighbor]) {
+					return true;
+				}
+		}
+	
+  	stack[index] = false;
+		return false;
+}
