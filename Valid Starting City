@@ -12,3 +12,19 @@ function validStartingCity(distances, fuel, mpg) {
 	}
 	return startCity;
 }
+
+
+function validStartingCity(distances, fuel, mpg) {
+	let cities = distances.length;
+	let currentFuel = 0;
+	for (let i = 0; i < cities; i ++) {
+		let remaining = 0;
+		for (let j = i; j < i + cities; j ++) {
+				if (remaining < 0) continue;
+			  let currIdx = j % cities;
+				remaining += fuel[currIdx] * mpg - distances[currIdx];
+		}
+		if (remaining >= 0) return i;
+	}
+	return -1;
+}
