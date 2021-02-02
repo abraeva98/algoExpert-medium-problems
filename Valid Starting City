@@ -1,0 +1,14 @@
+function validStartingCity(distances, fuel, mpg) {
+	let startCity = 0;
+	let fuelAtStart = 0;
+	let totalFuel = 0;
+	for (let i = 1; i < distances.length; i ++) {
+			let fuelAtPreviousCity = fuel[i - 1] * mpg - distances[i - 1];
+		  totalFuel += fuelAtPreviousCity
+		  if (totalFuel < fuelAtStart) {
+					startCity = i;
+					fuelAtStart = totalFuel;
+			}
+	}
+	return startCity;
+}
