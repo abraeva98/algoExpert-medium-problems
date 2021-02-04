@@ -1,0 +1,29 @@
+function phoneNumberMnemonics(phoneNumber) {
+	let phoneBook = {
+		0: "0",
+		1: "1",
+		2: 'abc',
+		3: 'def',
+		4: 'ghi',
+		5: 'jkl',
+		6: 'mno',
+		7: 'pqrs',
+		8: 'tuv',
+		9: 'wxyz'
+	};
+	let letters = [];
+	for (let i = 0; i < phoneNumber.length; i ++) {
+		letters.push(phoneBook[phoneNumber[i]]);
+	}
+	let result = [];
+	function helper(arr, selected) {
+		if (arr.length === phoneNumber.length) {
+			result.push(arr.join(''));
+		} else {
+			for (let i = 0; i < selected.length; i ++) {
+				for (let j = i; j < selected[i].length; j ++) {
+					arr.push(selected[i][j]);
+					let newArr = selected.slice(i + 1);
+					helper(arr, newArr);
+					arr.pop();
+				}
