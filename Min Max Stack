@@ -1,0 +1,37 @@
+class MinMaxStack {
+	constructor() {
+		this.stack = [];
+		this.minMax = [];
+	}
+	
+  peek() {
+		return this.stack[this.stack.length - 1];
+  }
+
+  pop() {
+		this.minMax.pop()
+		return this.stack.pop();
+  }
+
+  push(number) {
+		if (this.minMax.length === 0) {
+			this.minMax.push({min: number, max: number});
+		} else {
+			let lastMinMax = this.minMax[this.minMax.length - 1];
+			let newMinMax = {
+				min: Math.min(lastMinMax.min, number),
+				max: Math.max(lastMinMax.max, number)
+			};
+			this.minMax.push(newMinMax)
+		}
+		this.stack.push(number)
+  }
+
+  getMin() {
+		return this.minMax[this.minMax.length - 1].min;
+  }
+
+  getMax() {
+		return this.minMax[this.minMax.length - 1].max;
+  }
+}
