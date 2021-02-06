@@ -1,0 +1,30 @@
+function balancedBrackets(string) {
+	const stack = [];
+	const closingBrackets = {
+		']': '[',
+		')': '(',
+		'}': '{',
+	}
+	
+	const openingBrackets = {
+		'[': ']',
+		'(': ')',
+		'{': '}'
+	}
+	
+	for (let i = 0; i < string.length; i ++) {
+		const lastEl = stack[stack.length - 1];
+		const char = string[i];
+		if (!closingBrackets[char] && !openingBrackets[char]) continue;
+		if (!openingBrackets[char]) {
+			if (lastEl === closingBrackets[char]) {
+				stack.pop();
+			} else {
+				return false;
+			}
+		} else {
+			stack.push(char)
+		}
+	}
+	return stack.length === 0;
+}
