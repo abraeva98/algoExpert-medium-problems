@@ -1,0 +1,27 @@
+function sunsetViews(buildings, direction) {
+  // Write your code here.
+	let idx = [];
+	for (let i = 0; i < buildings.length; i ++) {
+		let isGreater = false;
+		if (direction === 'EAST') {
+					for (let j = i + 1; j < buildings.length; j ++) {
+						if (buildings[j] >= buildings[i]) {
+						isGreater = true;
+						continue;
+					};
+				}
+		if (!isGreater) idx.push(i);
+		} else {
+			isGreater = false;
+			for (let j = i - 1; j > 0; j --) {
+				if (buildings[j] >= buildings[i]) {
+						isGreater = true;
+						continue;
+					};
+			}
+			if (!isGreater) idx.push(i);
+		}
+
+	}
+  return idx;
+}
