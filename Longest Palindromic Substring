@@ -28,3 +28,45 @@ function isPalindrome(str) {
 	}
 	return true;
 }
+
+
+
+
+__________________________
+
+function longestPalindromicSubstring(string) {
+  // Write your code here.
+	if (string.length <= 1) return string;
+	let largest = 0;
+	let str = '';
+	for (let i = 1; i < string.length; i ++) {
+		let result;
+		let result1 = doubleMirror(i, i - 1, string);
+		let result2 = doubleMirror(i + 1, i - 1, string);
+	  if (result1.length > result2.length) {
+			result = result1
+		} else {
+			result = result2;
+		}
+		if (!result) continue;
+		if (result.length > largest) {
+			largest = result.length;
+			str = result;
+		}
+	}
+	return str;
+}
+
+function doubleMirror(right, left, str) {
+	while (left >= 0 && right < str.length) {
+		if (str[right] === str[left]) {
+			right ++;
+			left --;
+		} else {
+			break;
+		}
+	}
+	left += 1;
+	str = str.slice(left, right);
+	return str;
+}
