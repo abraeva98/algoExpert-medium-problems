@@ -46,3 +46,19 @@ function sunsetViews(buildings, direction) {
 	}
   return idx;
 }
+
+function sunsetViews(buildings, direction) {
+	let result = [];
+	let index = direction === 'WEST' ? 0 : buildings.length - 1;
+	let step = direction === 'WEST' ? 1 : - 1;
+	let runningMaxHeight = 0;
+	while (index >= 0 && index < buildings.length) {
+		if (buildings[index] > runningMaxHeight) {
+			result.push(index);
+			runningMaxHeight = buildings[index];
+		}
+		index += step;
+	}
+	if (direction === 'EAST') result.reverse()
+  return result;
+}
