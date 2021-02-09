@@ -1,0 +1,12 @@
+function groupAnagrams(words) {
+	let hashTable = {};
+	for (let i = 0; i < words.length; i ++) {
+		 let sortedString = words[i].split('').sort().join('');
+		 if (hashTable[sortedString]) {
+			 hashTable[sortedString].push(words[i])
+		 } else {
+			 hashTable[sortedString] = [words[i]]
+		 }
+	}
+	return Object.values(hashTable);
+}
