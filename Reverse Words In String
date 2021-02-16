@@ -1,0 +1,21 @@
+function reverseWordsInString(string) {
+	let reversed = [];
+	/*
+		Iterate through a string when we find the space
+		we will unshift it to the reversed array.
+		We will use pointers for that.
+	*/
+	let start = 0;
+	let end = 0;
+	while (end < string.length) {
+		if (string[end] !== ' ') {
+			  end ++;
+		} else {
+				reversed.unshift(string.slice(start, end));
+			  end ++;
+	   		start = end;
+		}
+	}
+	reversed.unshift(string.slice(start, end));
+  return reversed.join(' ');
+}
