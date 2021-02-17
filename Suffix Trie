@@ -1,0 +1,31 @@
+class SuffixTrie {
+  constructor(string) {
+    this.root = {};
+    this.endSymbol = '*';
+    this.populateSuffixTrieFrom(string);
+  }
+
+  populateSuffixTrieFrom(string) {
+		for (let i = 0; i < string.length; i ++) {
+			let node = this.root;
+				for (let j = i; j < string.length; j ++) {
+					let letter = string[j]
+					if (!node[letter]) {
+						node[letter] = {};
+					}
+					node = node[letter]
+				}
+			node[this.endSymbol] = true;
+  }
+}
+	
+  contains(string) {
+		let node = this.root
+		for (let i = 0; i < string.length; i ++) {
+			let letter = string[i];
+			if (!node[letter]) return false;
+			node = node[letter];
+		}
+		return !!node[this.endSymbol];
+  }
+}
