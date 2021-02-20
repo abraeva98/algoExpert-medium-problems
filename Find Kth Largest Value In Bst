@@ -1,0 +1,22 @@
+function findKthLargestValueInBst(tree, k) {
+	/* 
+			traverse through the tree DFS reverse in order
+			srote each node in an array
+			return Kth node
+	*/
+	let result = null;
+	
+	function helper(tree) {
+			if (result) return;
+			if (tree === null) return;
+			if (tree.right) helper(tree.right, k);
+			k --;
+			if (0 === k) {
+				result = tree.value;
+			}
+			if (tree.left) helper(tree.left, k);
+	}
+	
+	helper(tree);
+	return result;
+}
