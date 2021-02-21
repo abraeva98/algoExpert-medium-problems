@@ -1,3 +1,6 @@
+
+// O(N^2) - time, O(N) - space
+
 class BST {
   constructor(value, left = null, right = null) {
     this.value = value;
