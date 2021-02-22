@@ -1,0 +1,23 @@
+// O(N) - time, O(h) - space (size of callstack)
+
+
+function heightBalancedBinaryTree(tree) {
+	if (tree === null) return null;
+	let isBalanced = true;
+	
+	function findDepth(node) {
+		if (node === null) return 0;
+		if (isBalanced === false) return;
+		
+		let leftSubtree = findDepth(node.left);
+		let rightSubtree = findDepth(node.right);
+		
+		let difference = Math.abs(leftSubtree - rightSubtree);
+		if (difference > 1) isBalanced = false;
+				
+		return Math.max(leftSubtree, rightSubtree) + 1;
+	}
+	
+	findDepth(tree);
+	return isBalanced;
+}
