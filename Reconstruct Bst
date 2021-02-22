@@ -10,7 +10,7 @@ class BST {
 function reconstructBst(preOrderTraversalValues) {
   // Write your code here.
 	let rootIdx = 0;
-	let root = preOrderTraversalValues[0];
+
 	function buildBST(lower, upper) {
 		if (rootIdx === preOrderTraversalValues.length) return null;
 		
