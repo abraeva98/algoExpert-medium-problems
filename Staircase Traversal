@@ -1,5 +1,22 @@
 // O(k*n) time, O(n) space - n(height), k(maxSteps)
 function staircaseTraversal(height, maxSteps) {
+	let numberOfWays = new Array(height + 1).fill(0);
+	numberOfWays[0] = 1;
+	numberOfWays[1] = 1;
+	
+	for (let i = 2; i <= height; i ++) {
+		let step = 1;
+		while (step <= maxSteps && step <= i) {
+			numberOfWays[i] = numberOfWays[i - step] + numberOfWays[i];
+			step ++;
+		}
+	}
+	
+	return numberOfWays[height];
+}
+
+// O(k*n) time, O(n) space - n(height), k(maxSteps)
+function staircaseTraversal(height, maxSteps) {
 	if (height <= 1) return 1;
 	let numberOfWays = 0;
 	let memo = {};
@@ -17,7 +34,6 @@ function staircaseTraversal(height, maxSteps) {
 
 
 // O(k^n) time, O(n) space - n(height), k(maxSteps)
-   
 function staircaseTraversal(height, maxSteps) {
 	if (height <= 1) return 1;
 	let numberOfWays = 0;
