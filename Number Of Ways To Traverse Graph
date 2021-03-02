@@ -1,0 +1,20 @@
+// O(N*M) - time, space
+function numberOfWaysToTraverseGraph(width, height) {
+	/* 
+		create a grid where num of rows is the height
+		and number of column is the width
+	*/
+	let column = new Array(width).fill(0);
+	let grid = new Array(height).fill(column);
+	for (let i = 0; i < grid.length; i ++) {
+		for (let j = 0; j < grid[0].length; j ++) {
+			if (i === 0 && j === 0) grid[i][j] = 1;
+			else {
+				let up = i > 0 ? grid[i - 1][j] : 0;
+				let left = j > 0 ? grid[i][j - 1] : 0;
+				grid[i][j] = up + left;
+			}
+		}
+	}
+	return grid[height - 1][width - 1];
+}
