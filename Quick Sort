@@ -1,0 +1,36 @@
+O(NlogN) - space, time
+
+function quickSort(array) {
+	
+  sort(0, array.length - 1);
+	return array;
+	
+	function sort(startIdx, endIdx) {
+		if (startIdx >= endIdx) return;
+		let pivot = startIdx;
+		let left = startIdx + 1;
+		let right = endIdx;
+		while (left <= right) {
+			if (array[pivot] < array[left] && array[pivot] > array[right]) {
+				swap(left, right)
+			}
+			if (array[pivot] >= array[left]) left ++; 
+			if (array[pivot] <= array[right]) right --;
+		}
+		swap(pivot, right);
+		const isLeftSmaller = right - startIdx - 1 < endIdx - (right + 1);
+		if (isLeftSmaller) {
+			sort(startIdx, right - 1);
+			sort(right + 1, endIdx);
+		} else {
+			sort(right + 1, endIdx);
+			sort(startIdx, right - 1);
+		}
+	}
+	
+	function swap(left, right) {
+		let temp = array[left];
+		array[left] = array[right];
+		array[right] = temp;
+	}
+}
