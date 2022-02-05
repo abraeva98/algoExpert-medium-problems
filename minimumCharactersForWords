@@ -1,0 +1,28 @@
+O(NM) - time complexity where N is number of words and M is the length of words, O(C) is space complexity where C is length of the unique characters 
+
+function minimumCharactersForWords(words) {
+  // Write your code here.
+	let charUsed = new Map();
+	for (let i = 0; i < words.length; i ++) {
+		let curUsed = new Map();
+		
+		for (let j = 0; j < words[i].length; j ++) {
+			let curLetter = words[i][j];
+			curUsed.set(curLetter, curUsed.get(curLetter) + 1 || 1);
+		}
+		
+		for (let [key, val] of curUsed) {
+			  if(!charUsed.get(key) || charUsed.get(key) < val) {
+					charUsed.set(key, val);
+				} 
+		}
+	}
+	let res = [];
+	for (let [key, val] of charUsed) {
+		while(val > 0) {
+			res.push(key);
+			val --;
+		}
+	}
+  return res;
+}
