@@ -1,0 +1,15 @@
+function mergeOverlappingIntervals(array) {
+  // Write your code here.
+	array.sort((a, b) => a[0] - b[0]);
+	let merged = [array[0]];
+	for (let i = 0; i < array.length - 1; i ++) {
+		let [currStart, currEnd] = merged[merged.length - 1];
+		let [nextStart, nextEnd] = array[i + 1];
+		if(nextStart <= currEnd) {
+			merged[merged.length - 1] = [currStart, Math.max(currEnd, nextEnd)];
+		} else {
+			merged.push(array[i + 1]);
+		}
+	}
+  return merged;
+}
