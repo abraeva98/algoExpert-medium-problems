@@ -1,0 +1,26 @@
+O(N^2) - time complexity where N is length of stack, O(N) - space
+
+function sortStack(stack) {
+	if(stack.length === 0) return [];
+	
+	let cur = stack.pop();
+	sortStack(stack);	
+	sortedStack(stack, cur);
+
+	return stack;
+}
+
+function sortedStack(stack, cur) {
+	if (stack.length === 0) {
+		stack.push(cur);
+	} else {
+		if (stack[stack.length - 1] < cur) {
+			stack.push(cur);
+			return;
+		} else {
+			let last = stack.pop();
+			sortedStack(stack, cur);	
+			stack.push(last);
+		}
+	}
+}
