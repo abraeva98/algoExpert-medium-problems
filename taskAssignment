@@ -1,0 +1,25 @@
+O(nlogn) - time, O(n) - space
+
+function taskAssignment(k, tasks) {
+	let idx = new Map();
+	for (let i = 0; i < tasks.length; i ++) {
+		let task = tasks[i];
+		if (!idx.has(task)) idx.set(task, []);
+		idx.get(task).push(i);
+	}
+	
+	tasks.sort((a, b) => a - b);
+	let start = 0;
+	let end = tasks.length - 1;
+	let res = [];
+	
+	while (start < end) {
+		let left = idx.get(tasks[start]).pop();
+		let right = idx.get(tasks[end]).pop();
+		res.push([left, right]);
+		start ++;
+	  end --;
+	}
+	
+	return res;
+}
