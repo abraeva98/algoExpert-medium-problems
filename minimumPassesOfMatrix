@@ -1,0 +1,50 @@
+function minimumPassesOfMatrix(matrix) {
+  // Write your code here.
+  return updateMatrix(matrix);
+}
+
+function updateMatrix(matrix) {
+	let stack = [];
+	for (let i = 0; i < matrix.length; i ++) {
+		for (let j = 0; j < matrix[i].length; j ++) {
+			if (matrix[i][j] > 0) stack.push([i, j]);
+		}
+	}
+	
+	let passes = 0;
+	while(stack.length > 0) {
+		//passes ++;
+		let curStack = stack;
+		let temp = [];
+		while(curStack.length > 0) {
+			let [i, j] = curStack.pop();
+			let up = checkNeighbors(matrix, i - 1, j);
+			let down = checkNeighbors(matrix, i + 1, j);
+			let left = checkNeighbors(matrix, i, j - 1);
+			let right = checkNeighbors(matrix, i, j + 1);
+			if (up !== 0) temp.push(up);
+			if (down !== 0) temp.push(down);
+			if (left !== 0) temp.push(left);
+			if (right !== 0) temp.push(right);
+		}
+		if(temp.length > 0) passes ++;
+		stack = temp;
+	}
+	
+	return checkIfNegative(matrix) ? -1 : passes;
+}
+
+function checkNeighbors(matrix, i, j) {
+	if (i < 0 || j < 0 || i >= matrix.length || j >= matrix[i].length || matrix[i][j] >= 0) return 0;  
+	matrix[i][j] *= -1;
+	return [i, j];
+}
+
+function checkIfNegative(matrix) {
+	for (let rows of matrix) {
+		for (let el of rows) {
+			if (el < 0) return true;
+		}
+	}
+	return false;
+}
