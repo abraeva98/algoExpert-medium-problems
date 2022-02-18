@@ -1,0 +1,28 @@
+function nextGreaterElement(array) {
+  // Write your code here.
+	let stack = [];
+	let nextGreater = new Array(array.length).fill(-1);
+	
+	for(let i = 0; i < array.length; i ++) {
+		if(stack.length === 0 || array[i] < array[stack[stack.length - 1]]) {
+			stack.push(i);
+		} else {
+			while(array[stack[stack.length - 1]] < array[i]) {
+				let idx = stack.pop();
+				nextGreater[idx] = array[i];
+			}
+			stack.push(i);
+		}
+	}
+	
+	if(stack.length > 0) {
+		for(let i = 0; i < array.length; i ++) {
+		   while(array[stack[stack.length - 1]] < array[i]) {
+				 let idx = stack.pop();
+				 nextGreater[idx] = array[i];
+			 }
+		}
+	}
+	
+  return nextGreater;
+}
