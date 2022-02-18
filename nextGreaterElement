@@ -3,6 +3,21 @@ function nextGreaterElement(array) {
 	let stack = [];
 	let nextGreater = new Array(array.length).fill(-1);
 	
+	for(let i = 0; i < array.length * 2; i ++) {
+		let idx = i % array.length;
+		while(stack.length > 0 && array[stack[stack.length - 1]] < array[idx]) {
+				nextGreater[stack.pop()] = array[idx];
+		}
+		if(i < array.length) stack.push(i);
+		}
+	return nextGreater;
+	}
+
+function nextGreaterElement(array) {
+  // Write your code here.
+	let stack = [];
+	let nextGreater = new Array(array.length).fill(-1);
+	
 	for(let i = 0; i < array.length; i ++) {
 		if(stack.length === 0 || array[i] < array[stack[stack.length - 1]]) {
 			stack.push(i);
